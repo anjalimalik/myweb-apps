@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<title>Time Log Web App</title>
+
+<script language="javascript" type="text/javascript" src="BillableHrs.js"></script>
+
+<style type="text/css">
+
+body {
+    background:grey;
+}
+
+#h1addnewentry {
+    position:absolute;
+    left:25px;
+    top:10px;
+    width:200px;
+    height:30px;
+    text-align:right;
+    font-family:Courier;
+    font-size:25px;
+}   
+
+#h1TimeLog {
+    position:absolute;
+    left:25px;
+    top:325px;
+    width:250px;
+    height:30px;
+    text-align:right;
+    font-family:Courier;
+    font-size:25px;
+}
+
+#lbEmployeeID {
+    position:absolute;
+    left:25px;
+    top:70px;
+    width:150px;
+    height:30px;
+    text-align:right;
+    font-family:Courier;
+    font-size:15px;
+}
+
+#lbDateWorked {
+    position:absolute;
+    left:25px;
+    top:110px;
+    width:150px;
+    height:30px;
+    text-align:right;
+    font-family:Courier;
+    font-size:15px;
+}
+
+#lbHoursWorked {
+    position:absolute;
+    left:425px;
+    top:70px;
+    width:150px;
+    height:30px;
+    text-align:right;
+    font-family:Courier;
+    font-size:15px;
+}
+
+#lbBillable{
+    position:absolute;
+    left:450px;
+    top:110px;
+    width:150px;
+    height:30px;
+    text-align:right;
+    font-family:Courier;
+    font-size:15px;
+}
+
+#chckbill {
+    position:absolute;
+    left:460px;
+    top:100px;
+    width:100px;
+    height:30px;
+    text-align:right;
+    font-family:Courier;
+    font-size:15px;
+}
+
+#lbDescription {
+    position:absolute;
+    left:25px;
+    top:170px;
+    width:150px;
+    height:30px;
+    text-align:right;
+    font-family:Courier;
+    font-size:15px;
+}
+
+#lbTotalHrs{
+    position:absolute;
+    left:375px;
+    top:375px;
+    width:250px;
+    height:30px;
+    text-align:right;
+    font-family:Courier;
+    font-size:15px;
+}
+
+
+#txtEmployeeID {
+    position:absolute;
+    left:200px;
+    top:65px;
+    width:175px;
+    height:30px;
+    text-align:left;
+    font-family:Courier;
+    font-size:15px;
+}
+
+#txtDateWorked {
+    position:absolute;
+    left:200px;
+    top:105px;
+    width:175px;
+    height:30px;
+    text-align:left;
+    font-family:Courier;
+    font-size:15px;
+}
+
+#txtHoursWorked {
+    position:absolute;
+    left:600px;
+    top:65px;
+    width:80px;
+    height:30px;
+    text-align:right;
+    font-family:Courier;
+    font-size:15px;
+}
+
+#txtDescription {
+    position:absolute;
+    left:85px;
+    top:200px;
+    width:400px;
+    height:100px;
+    text-align:left;
+    font-family:Courier;
+    font-size:15px;
+}
+
+
+#btnSave{
+    position:absolute;
+    left:500px;
+    top:280px;
+    width:70px;
+    height:30px;
+    text-align:center;
+    font-family:Courier;
+    font-size:20px;
+}
+
+#lbTotal{
+    position:absolute;
+    left:425px;
+    top:375px;
+    width:250px;
+    height:30px;
+    text-align:right;
+    font-family:Courier;
+    font-size:15px;
+}
+#div1 {
+    border: solid thin black;
+    width:735px; 
+    margin-left:0px; 
+    height:320px; 
+    margin-right:0px;
+    border-style: dashed; 
+}
+
+#list1 {
+    margin-top:65px;
+    margin-left:5px;
+    border: 1px solid black;
+    width: 1000px;
+    font-family:Courier;
+}
+#list1 th {
+    border: 1px solid black;
+    height: 20px;
+    background-color:blueviolet;
+    border-bottom: 1px solid black;
+    text-align: center;
+    padding: 10px;
+
+}
+#list1 td {
+    border-bottom: 1px solid orange;
+    text-align: left;
+    padding: 1px;
+}
+
+.scrollable {
+    max-height: 100px;
+    overflow-y:scroll;
+}
+
+</style>
+
+</head>
+
+<body onload="onload()">
+    
+<!-- User Interface Elements -->
+<div id="div1">
+    <p> <h1 id="h1addnewentry">Add New Entry</h1> </p>
+
+    <label id="lbEmployeeID">Employee ID: </label>
+    <label id="lbDateWorked">Date Worked: </label>
+    <label id="lbHoursWorked">Hours Worked: </label>
+    <label id="lbBillable">Billable? </label>
+    <label id="lbDescription">Description: </label>
+    <label id="lbTotalHrs">Total Hours Worked: </label>
+    <label id ="lbTotal" />0.00</label>
+
+    <input type="text" id="txtEmployeeID"/>
+    <input type="text" id="txtDateWorked"/>
+
+    <input type="text" id="txtHoursWorked"/>
+
+    <input type="checkbox" id="chckbill"/> 
+
+    <textarea id="txtDescription" cols="40" rows="5"></textarea> 
+
+    <input type="button" onclick="btnSave_onclick();"
+                            id="btnSave" 
+                            value="Save" 
+    />
+</div>
+
+<p> <h1 id="h1TimeLog">Time Log Entries</h1> </p>
+
+
+<table id="list1" border = "0" cellpadding = "5" cellspacing = "5" >
+    <tr>
+       <th>Employee</th>
+       <th>Date</th>
+       <th>Hours</th>
+       <th>Description</th>
+       <th></th>
+    </tr>
+<div class= "scrollable">
+    <tr>
+    </tr>
+</div>
+ </table>
+
+
+</body>
+</html>
